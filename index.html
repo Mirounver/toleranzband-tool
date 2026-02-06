@@ -2,387 +2,263 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<title>Toleranzbandrechnung – Spotmarktwert</title>
+<title>Toleranzbandrechnung Strom – N-ERGIE</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
+/* =========================
+   N-ERGIE Corporate Design
+   ========================= */
 :root{
   --ner-red:#ff0000;
   --ner-violet:#710c2f;
   --ner-grey:#565656;
-  --ner-light:#f5f5f5;
+  --ner-grey-light:#f2f2f2;
+  --ner-text:#1a1a1a;
 }
 
+/* Grundlayout */
 body{
   margin:0;
-  font-family:"Frutiger","Segoe UI","Helvetica Neue",Arial,sans-serif;
+  font-family: "Frutiger","Segoe UI","Helvetica Neue",Arial,sans-serif;
+  color:var(--ner-text);
   background:#ffffff;
-  color:#1a1a1a;
+  line-height:1.4;
 }
 
-.page{
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:40px 20px;
+.container{
+  max-width:1200px;
+  margin:0 auto;
+  padding:32px 24px 64px;
 }
 
-.card{
-  background:#fff;
-  max-width:1100px;
-  width:100%;
-  padding:42px;
-  border-radius:20px;
-  box-shadow:0 20px 40px rgba(0,0,0,.08);
-}
-
+/* =========================
+   Header
+   ========================= */
 .header{
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  gap:16px;
-  margin-bottom:22px;
+  gap:24px;
+  border-bottom:3px solid var(--ner-violet);
+  padding-bottom:24px;
+  margin-bottom:32px;
 }
 
-.brand{
-  display:flex;
-  align-items:center;
-  gap:14px;
+.header img{
+  height:48px;
 }
-.logo{
-  width:44px;height:44px;border-radius:12px;
-  background:linear-gradient(135deg,var(--ner-red),var(--ner-violet));
-}
-h1{margin:0;font-size:22px;line-height:1.2}
-.sub{margin-top:6px;color:var(--ner-grey);font-size:14px}
 
-.tabs{
-  display:flex;
-  gap:10px;
-  margin:18px 0 26px;
+.header h1{
+  margin:0;
+  font-size:28px;
+  font-weight:700;
+  color:var(--ner-violet);
 }
-.tab{
-  border:1px solid #e6e6e6;
-  background:#fff;
-  padding:10px 14px;
-  border-radius:999px;
-  cursor:pointer;
-  font-weight:600;
+
+.header p{
+  margin:6px 0 0;
+  font-size:15px;
+  color:var(--ner-grey);
+}
+
+/* =========================
+   Sections
+   ========================= */
+.section{
+  margin-bottom:40px;
+}
+
+.section h2{
+  font-size:20px;
+  margin:0 0 16px;
+  color:var(--ner-violet);
+}
+
+.section p{
+  max-width:900px;
   font-size:14px;
-}
-.tab.active{
-  border-color:transparent;
-  background:var(--ner-light);
+  color:var(--ner-grey);
 }
 
-.grid{
+/* =========================
+   Auswahlbox
+   ========================= */
+.mode-select{
+  display:flex;
+  gap:16px;
+  margin-top:16px;
+}
+
+.mode-select button{
+  padding:12px 18px;
+  border-radius:4px;
+  border:2px solid var(--ner-grey-light);
+  background:#fff;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.mode-select button.active{
+  border-color:var(--ner-red);
+  color:var(--ner-red);
+}
+
+/* =========================
+   Formular
+   ========================= */
+.form-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:14px;
-}
-@media (max-width: 900px){
-  .grid{grid-template-columns:1fr;}
+  gap:24px;
+  max-width:900px;
 }
 
-.box{
-  border:1px solid #ededed;
-  border-radius:16px;
-  padding:16px;
-  background:#fff;
+.form-group label{
+  display:block;
+  font-size:13px;
+  margin-bottom:6px;
+  color:var(--ner-grey);
 }
 
-.box h2{
-  margin:0 0 10px;
-  font-size:16px;
-}
-.muted{color:var(--ner-grey);font-size:13px;margin:8px 0 0}
-
-label{display:block;font-size:13px;color:var(--ner-grey);margin:10px 0 6px}
-input{
+.form-group input{
   width:100%;
-  padding:12px 12px;
-  border-radius:12px;
-  border:1px solid #e5e5e5;
-  outline:none;
+  padding:10px;
+  border:1px solid #ccc;
   font-size:14px;
 }
-input:focus{border-color:var(--ner-violet);box-shadow:0 0 0 3px rgba(113,12,47,.08)}
 
-.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-.btn{
-  padding:12px 14px;
-  border-radius:12px;
-  border:0;
-  cursor:pointer;
-  font-weight:700;
-  font-size:14px;
+.form-group small{
+  font-size:12px;
+  color:var(--ner-grey);
 }
-.btn.primary{background:var(--ner-red);color:#fff}
-.btn.secondary{background:var(--ner-light);color:#111;border:1px solid #e6e6e6}
+
+/* =========================
+   Buttons
+   ========================= */
+.actions{
+  margin-top:24px;
+  display:flex;
+  gap:16px;
+}
+
+.actions button{
+  padding:12px 20px;
+  font-size:14px;
+  font-weight:700;
+  border:none;
+  cursor:pointer;
+}
+
+.btn-primary{
+  background:var(--ner-red);
+  color:#fff;
+}
+
+.btn-secondary{
+  background:#e6e6e6;
+  color:#000;
+}
+
+/* =========================
+   Ergebnis
+   ========================= */
+.result-box{
+  background:var(--ner-grey-light);
+  padding:24px;
+  max-width:900px;
+}
 
 .kpis{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:12px;
-  margin-top:18px;
+  gap:24px;
 }
-@media (max-width: 900px){
-  .kpis{grid-template-columns:1fr;}
-}
-.kpi{
-  background:var(--ner-light);
-  border-radius:16px;
-  padding:14px;
-}
-.kpi .k{font-size:12px;color:var(--ner-grey);margin-bottom:6px}
-.kpi .v{font-size:22px;font-weight:800}
-.kpi .u{font-size:12px;color:var(--ner-grey);margin-top:6px}
 
-.badge{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:8px 10px;
-  border-radius:999px;
-  font-weight:800;
+.kpi strong{
+  display:block;
+  font-size:22px;
+  margin-top:6px;
+}
+
+.status{
+  margin-top:16px;
+  font-weight:700;
+}
+
+/* =========================
+   Hinweis
+   ========================= */
+.notice{
+  border-left:4px solid var(--ner-violet);
+  padding:12px 16px;
   font-size:13px;
-  background:#f1f1f1;
+  color:var(--ner-grey);
+  max-width:900px;
 }
-.badge.ok{background:#e9f7ee}
-.badge.low{background:#e8f0ff}
-.badge.high{background:#ffecec}
-
-hr{border:0;border-top:1px solid #eee;margin:18px 0}
-.small{font-size:12px;color:var(--ner-grey)}
 </style>
 </head>
 
 <body>
-<div class="page">
-  <div class="card">
 
-    <div class="header">
-      <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
-        <div>
-          <h1>Toleranzbandrechnung – Spotmarktwert</h1>
-          <div class="sub">Rechnen Sie den Spotmarktwert und einen ggf. angepassten Arbeitspreis (EPᵤ / EPₒ).</div>
-        </div>
-      </div>
-    </div>
+<div class="container">
 
-    <!-- Tabs -->
-    <div class="tabs">
-      <button id="tabA" class="tab active" type="button">A: Lastgang hochladen (empfohlen)</button>
-      <button id="tabB" class="tab" type="button">B: Nur Summe + Spotpreis</button>
-    </div>
-
-    <div class="grid">
-
-      <!-- Left: Inputs -->
-      <div class="box">
-        <h2>1) Eingaben</h2>
-
-        <!-- Option A -->
-        <div id="panelA">
-          <label>Lastgang-Datei (CSV oder Excel)</label>
-          <input id="fileLastgang" type="file" accept=".csv,.xlsx,.xls">
-          <div class="muted">Tipp: Wenn Sie keinen Lastgang haben, nutzen Sie Option B.</div>
-        </div>
-
-        <!-- Option B -->
-        <div id="panelB" style="display:none">
-          <label>Jahresverbrauch (MWh)</label>
-          <input id="sumMWh" type="number" step="0.001" placeholder="z. B. 12000">
-
-          <label>Durchschnittlicher Spotpreis (€/MWh)</label>
-          <input id="spotPrice" type="number" step="0.01" placeholder="z. B. 85.50">
-          <div class="muted">Hinweis: Der Spotpreis wird vom Kunden angegeben.</div>
-        </div>
-
-        <hr>
-
-        <!-- Common contract fields -->
-        <label>Vertragsmenge (MWh)</label>
-        <input id="contractMWh" type="number" step="0.001" placeholder="z. B. 10000">
-
-        <label>Arbeitspreis EP (€/MWh)</label>
-        <input id="ep" type="number" step="0.01" placeholder="z. B. 90.00">
-
-        <div class="btnrow">
-          <button id="btnCalc" class="btn primary" type="button">Berechnen</button>
-          <button id="btnReset" class="btn secondary" type="button">Zurücksetzen</button>
-        </div>
-
-        <div class="small" style="margin-top:10px">
-          Datenschutz: Berechnung erfolgt lokal im Browser. Keine Speicherung / Übertragung.
-        </div>
-      </div>
-
-      <!-- Right: Results -->
-      <div class="box">
-        <h2>2) Ergebnis</h2>
-
-        <div id="status" class="badge">Noch nicht berechnet</div>
-
-        <div class="kpis">
-          <div class="kpi">
-            <div class="k">Gesamtverbrauch</div>
-            <div id="kpiMWh" class="v">–</div>
-            <div class="u">MWh</div>
-          </div>
-          <div class="kpi">
-            <div class="k">Summe Spotkosten</div>
-            <div id="kpiEuro" class="v">–</div>
-            <div class="u">€</div>
-          </div>
-          <div class="kpi">
-            <div class="k">Spotmarktwert</div>
-            <div id="kpiSpot" class="v">–</div>
-            <div class="u">€/MWh</div>
-          </div>
-        </div>
-
-        <hr>
-
-        <div class="grid" style="grid-template-columns:1fr 1fr;gap:12px">
-          <div class="kpi" style="background:#fff;border:1px solid #eee">
-            <div class="k">Unteres Toleranzband (80%)</div>
-            <div id="tbu" class="v" style="font-size:18px">–</div>
-            <div class="u">MWh</div>
-          </div>
-          <div class="kpi" style="background:#fff;border:1px solid #eee">
-            <div class="k">Oberes Toleranzband (120%)</div>
-            <div id="tbo" class="v" style="font-size:18px">–</div>
-            <div class="u">MWh</div>
-          </div>
-        </div>
-
-        <div class="kpi" style="margin-top:12px">
-          <div class="k">Neuer Arbeitspreis (falls außerhalb Band)</div>
-          <div id="newEP" class="v">–</div>
-          <div class="u">€/MWh</div>
-        </div>
-
-        <div class="small" style="margin-top:10px" id="note"></div>
-      </div>
-
+  <!-- HEADER -->
+  <div class="header">
+    <img src="N-ERGIE_LOGO_RGB.png" alt="N-ERGIE Logo">
+    <div>
+      <h1>Toleranzbandrechnung Strom</h1>
+      <p>Berechnung des Spotmarktwerts und eines angepassten Arbeitspreises gemäß Vertragslogik.</p>
     </div>
   </div>
+
+  <!-- MODE -->
+  <div class="section">
+    <h2>1. Eingabeart wählen</h2>
+    <div class="mode-select">
+      <button class="active">A: Lastgang hochladen</button>
+      <button>B: Jahresverbrauch & Spotpreis</button>
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <div class="section">
+    <h2>2. Vertragsdaten</h2>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Vertragsmenge (MWh)</label>
+        <input type="number" placeholder="z. B. 10.000">
+      </div>
+      <div class="form-group">
+        <label>Arbeitspreis (€/MWh)</label>
+        <input type="number" placeholder="z. B. 85,00">
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn-primary">Berechnen</button>
+      <button class="btn-secondary">Zurücksetzen</button>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="section">
+    <h2>3. Ergebnis</h2>
+    <div class="result-box">
+      <div class="kpis">
+        <div class="kpi">Gesamtverbrauch<strong>–</strong></div>
+        <div class="kpi">Spotmarktwert<strong>–</strong></div>
+        <div class="kpi">Neuer Arbeitspreis<strong>–</strong></div>
+      </div>
+      <div class="status">Noch keine Berechnung durchgeführt</div>
+    </div>
+  </div>
+
+  <!-- NOTICE -->
+  <div class="notice">
+    Hinweis: Die Berechnung stellt eine modellhafte Darstellung dar und ersetzt keine vertraglich verbindliche Abrechnung.
+  </div>
+
 </div>
-
-<script>
-/** STEP A: Tabs umschalten **/
-const tabA = document.getElementById("tabA");
-const tabB = document.getElementById("tabB");
-const panelA = document.getElementById("panelA");
-const panelB = document.getElementById("panelB");
-
-let mode = "A"; // A=Lastgang, B=Summe+Spot
-
-tabA.addEventListener("click", () => {
-  mode = "A";
-  tabA.classList.add("active"); tabB.classList.remove("active");
-  panelA.style.display = ""; panelB.style.display = "none";
-});
-
-tabB.addEventListener("click", () => {
-  mode = "B";
-  tabB.classList.add("active"); tabA.classList.remove("active");
-  panelB.style.display = ""; panelA.style.display = "none";
-});
-
-/** STEP B: Spotpreise laden (fix im Tool) **/
-let spotData = null;
-async function loadSpot(){
-  const res = await fetch("spotpreise.json");
-  spotData = await res.json();
-}
-loadSpot();
-
-/** STEP C: Helper Format **/
-function fmt(n, digits=2){
-  if (!isFinite(n)) return "–";
-  return n.toLocaleString("de-DE", {minimumFractionDigits:digits, maximumFractionDigits:digits});
-}
-function setStatus(text, cls){
-  const el = document.getElementById("status");
-  el.textContent = text;
-  el.className = "badge " + (cls||"");
-}
-
-/** STEP D: KERNRECHNUNG **/
-function calcNewEP(sumMWh, spot, contractMWh, ep){
-  const TBU = 0.8 * contractMWh;
-  const TBO = 1.2 * contractMWh;
-
-  // innerhalb Band
-  if (sumMWh >= TBU && sumMWh <= TBO){
-    return {TBU, TBO, status:"ok", newEP: ep};
-  }
-  // Unterdeckung
-  if (sumMWh < TBU){
-    const newEP = (ep*TBU - 1.1*spot*(TBU - sumMWh)) / sumMWh;
-    return {TBU, TBO, status:"low", newEP};
-  }
-  // Überdeckung
-  const newEP = (ep*TBO + 0.9*spot*(sumMWh - TBO)) / sumMWh;
-  return {TBU, TBO, status:"high", newEP};
-}
-
-/** STEP E: Berechnen Button **/
-document.getElementById("btnCalc").addEventListener("click", async () => {
-  const contractMWh = Number(document.getElementById("contractMWh").value);
-  const ep = Number(document.getElementById("ep").value);
-
-  if (!spotData){
-    alert("Spotpreise werden noch geladen. Bitte 2 Sekunden warten und erneut versuchen.");
-    return;
-  }
-
-  if (!(contractMWh > 0) || !(ep > 0)){
-    alert("Bitte Vertragsmenge (MWh) und Arbeitspreis EP (€/MWh) eingeben.");
-    return;
-  }
-
-  // OPTION B (Summe + Spotpreis)
-  if (mode === "B"){
-    const sumMWh = Number(document.getElementById("sumMWh").value);
-    const spot = Number(document.getElementById("spotPrice").value);
-
-    if (!(sumMWh > 0) || !(spot > 0)){
-      alert("Bitte Jahresverbrauch (MWh) UND Spotpreis (€/MWh) eingeben.");
-      return;
-    }
-
-    const sumEuro = sumMWh * spot;
-    const res = calcNewEP(sumMWh, spot, contractMWh, ep);
-
-    document.getElementById("kpiMWh").textContent = fmt(sumMWh, 3);
-    document.getElementById("kpiEuro").textContent = fmt(sumEuro, 2);
-    document.getElementById("kpiSpot").textContent = fmt(spot, 2);
-
-    document.getElementById("tbu").textContent = fmt(res.TBU, 3);
-    document.getElementById("tbo").textContent = fmt(res.TBO, 3);
-    document.getElementById("newEP").textContent = fmt(res.newEP, 2);
-
-    if (res.status === "ok") setStatus("Innerhalb Toleranzband", "ok");
-    if (res.status === "low") setStatus("Unteres Toleranzband unterschritten", "low");
-    if (res.status === "high") setStatus("Oberes Toleranzband überschritten", "high");
-
-    document.getElementById("note").textContent =
-      "Option B: Spotpreis wurde vom Kunden angegeben (keine Lastgangdaten).";
-    return;
-  }
-
-  // OPTION A (Lastgang Upload) – jetzt erstmal Platzhalter
-  alert("Option A (Lastgang-Upload) kommt als nächster Schritt. Erst testen wir Option B, damit alles sauber läuft.");
-});
-
-/** STEP F: Reset **/
-document.getElementById("btnReset").addEventListener("click", () => location.reload());
-</script>
 
 </body>
 </html>
