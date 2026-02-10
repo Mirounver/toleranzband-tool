@@ -6,9 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-/* ===============================
-   N-ERGIE CORPORATE DESIGN
-   =============================== */
 :root{
   --ner-red:#ff0000;
   --ner-violet:#710c2f;
@@ -51,7 +48,6 @@ body{
   color:var(--ner-grey);
 }
 
-/* Sections */
 .section{margin-bottom:40px}
 .section h2{
   font-size:20px;
@@ -59,7 +55,6 @@ body{
   margin:0 0 16px;
 }
 
-/* Mode */
 .mode{
   display:flex;
   gap:16px;
@@ -76,7 +71,6 @@ body{
   color:var(--ner-red);
 }
 
-/* Form */
 .form{
   max-width:900px;
   display:grid;
@@ -97,7 +91,6 @@ body{
   box-sizing:border-box;
 }
 
-/* Upload box */
 .uploadBox{
   max-width:900px;
   border:1px dashed #ccc;
@@ -108,7 +101,6 @@ body{
   outline:2px dashed var(--ner-red);
 }
 
-/* Buttons */
 .actions{
   margin-top:24px;
   display:flex;
@@ -123,7 +115,6 @@ body{
 .primary{background:var(--ner-red);color:#fff}
 .secondary{background:#e6e6e6}
 
-/* Result */
 .result{
   background:var(--ner-grey-light);
   padding:24px;
@@ -170,17 +161,55 @@ body{
 .input-error{
   border:2px solid var(--ner-red) !important;
 }
-/* ===============================
-   PDF-only Inhalte
-   =============================== */
-.pdf-only{
-  display:none;
-}
 
-/* Nur beim PDF / Print sichtbar */
 @media print{
+
+  .mode,
+  #panelA,
+  #panelB,
+  .actions,
+  .section h2,
+  .section:nth-of-type(1),
+  .section:nth-of-type(2)
+  {
+    display:none !important;
+  }
+
   .pdf-only{
-    display:block;
+    display:block !important;
+  }
+
+  body{
+    background:#fff;
+  }
+
+  .container{
+    max-width:none;
+    padding:0;
+  }
+
+  .header{
+    display:none !important;
+  }
+
+  .result{
+    background:#fff;
+    padding:0;
+    max-width:none;
+  }
+
+  *{
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .kpis, .kpi, .notice, .status{
+    page-break-inside:avoid;
+  }
+
+  @page{
+    size:A4;
+    margin:15mm;
   }
 }
 </style>
@@ -188,17 +217,6 @@ body{
 
 <body>
 <div class="container">
-<div id="pdfCover" class="pdf-only" style="margin-bottom:40px">
-  <h1>Toleranzbandrechnung Strom</h1>
-
-  <p><strong>Firma:</strong> <span id="pdfCompany">–</span></p>
-  <p><strong>Marktlokation:</strong> <span id="pdfMalo">–</span></p>
-  <p><strong>Eingabeart:</strong> <span id="pdfMode">–</span></p>
-  <p><strong>Datum:</strong> <span id="pdfDate">–</span></p>
-
-  <hr style="margin-top:24px">
-</div>
-<!-- HEADER -->
 <div class="header">
   <img src="N-ERGIE_LOGO_RGB.png" alt="N-ERGIE">
   <div>
@@ -207,40 +225,36 @@ body{
   </div>
 </div>
 
-<!-- MODE -->
 <div class="section">
   <h2>1. Eingabeart</h2>
   <div class="mode">
     <button id="modeA" class="active">A: Lastgang</button>
-    <button id="modeB">B: Jahresmenge + Spotpreis</button>
+    <button id="modeB">B: Jahresverbrauch + Spotpreis</button>
   </div>
 </div>
 
-<!-- INPUT -->
 <div class="section">
   <h2>2. Eingaben</h2>
 
-  <!-- Optional-Felder (A und B gleich + gleiche Reihenfolge) -->
   <div class="form">
     <div class="form-group">
       <label for="partnerNo">Geschäftspartnernummer (optional)</label>
-      <input id="partnerNo" type="text" inputmode="numeric" placeholder="z. B. 1234567890">
+      <input id="partnerNo" type="text" inputmode="numeric">
     </div>
     <div class="form-group">
       <label for="company">Firma (optional)</label>
-      <input id="company" type="text" placeholder="z. B. Muster GmbH">
+      <input id="company" type="text">
     </div>
     <div class="form-group">
       <label for="malo">Marktlokationsnummer (optional)</label>
-      <input id="malo" type="text" inputmode="numeric" placeholder="11-stellige MaLo">
+      <input id="malo" type="text" inputmode="numeric">
     </div>
     <div class="form-group">
       <label for="assetName">Anlagename (optional)</label>
-      <input id="assetName" type="text" placeholder="z. B. Werk 1 / Anlage A">
+      <input id="assetName" type="text">
     </div>
   </div>
 
-  <!-- Option A -->
   <div id="panelA" style="margin-top:24px">
     <div class="uploadBox" id="uploadBoxA">
       <div class="form-group" style="margin:0">
@@ -268,7 +282,6 @@ body{
     </div>
   </div>
 
-  <!-- Option B -->
   <div id="panelB" style="display:none; margin-top:24px">
     <div class="form">
       <div class="form-group">
@@ -282,7 +295,6 @@ body{
     </div>
   </div>
 
-  <!-- Pflichtfelder (A und B gleich + gleiche Reihenfolge) -->
   <div class="form" style="margin-top:24px">
     <div class="form-group">
       <label for="contract">Vertragsmenge (MWh) <span style="color:var(--ner-red)">*</span></label>
@@ -301,21 +313,9 @@ body{
   </div>
 </div>
 
-<!-- RESULT -->
 <div class="section">
   <h2>3. Ergebnis</h2>
   <div class="result">
-
-    <!-- ⬇️ HIER EINFÜGEN -->
-    <div id="inputSummary" class="notice" style="display:none">
-      <strong>Eingabedaten</strong><br>
-      Vertragsmenge: <span id="sContract">–</span><br>
-      Arbeitspreis EP: <span id="sEP">–</span><br>
-      Jahresverbrauch: <span id="sAM">–</span><br>
-      Spotpreis: <span id="sSpot">–</span>
-    </div>
-    <!-- ⬆️ BIS HIER -->
-
     <div class="kpis">
       <div class="kpi"><span>Jahresverbrauch</span><strong id="rMWh">–</strong></div>
       <div class="kpi"><span>Spotpreis</span><strong id="rSpot">–</strong></div>
@@ -337,19 +337,19 @@ body{
 
 <script src="lib/xlsx.full.min.js"></script>
 <script src="spotpreise_2025.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 <script>
 const requiredFields = [
-  "contract", // Vertragsmenge
-  "ep",       // Arbeitspreis
-  "sumMWh",   // nur Option B
-  "spot"      // nur Option B
+  "contract",
+  "ep", 
+  "sumMWh",
+  "spot"     
 ];
+const calcBtn = document.getElementById("calc");
+calcBtn.disabled = true;
+calcBtn.style.opacity = "0.5";
+calcBtn.style.cursor = "not-allowed";
 
-/* ===============================
-   Helpers
-   =============================== */
 function showWarning(msg){
   const statusEl = document.getElementById("status");
   const explanation = document.getElementById("explanation");
@@ -373,7 +373,6 @@ function reqNumber(value){
 }
 
 function extractMaloFromText(text){
-  // MaLo i.d.R. 11-stellig
   const s = String(text ?? "");
   const m = s.match(/\b\d{11}\b/);
   return m ? m[0] : null;
@@ -384,16 +383,51 @@ function setLoading(on){
   if (!loading) return;
   loading.style.display = on ? "block" : "none";
 }
+function setCalcEnabled(enabled){
+  const btn = document.getElementById("calc");
+  btn.disabled = !enabled;
+  btn.style.opacity = enabled ? "1" : "0.5";
+  btn.style.cursor = enabled ? "pointer" : "not-allowed";
+}
 
-/* ===============================
-   Debug Spot
-   =============================== */
+function resetStatus(){
+  const s = document.getElementById("status");
+  const e = document.getElementById("explanation");
+
+  s.textContent = "Noch keine Berechnung";
+  s.className = "status";
+
+  if (e){
+    e.style.display = "none";
+    e.innerHTML = "";
+  }
+}
+function checkModeBReady(){
+  if (mode !== "B") return;
+
+  const am = document.getElementById("sumMWh").value;
+  const spot = document.getElementById("spot").value;
+  const vm = document.getElementById("contract").value;
+  const ep = document.getElementById("ep").value;
+
+  const ready =
+    am > 0 &&
+    spot > 0 &&
+    vm > 0 &&
+    ep > 0;
+
+  setCalcEnabled(ready);
+}
+["sumMWh","spot","contract","ep"].forEach(id => {
+  const el = document.getElementById(id);
+  if (el){
+    el.addEventListener("input", checkModeBReady);
+  }
+});
+
 console.log("Spotjahr:", typeof SPOT_YEAR !== "undefined" ? SPOT_YEAR : "(nicht geladen)");
 console.log("Spotpreise Anzahl:", Array.isArray(SPOT_PRICES) ? SPOT_PRICES.length : "(nicht geladen)");
 
-/* ===============================
-   MODE SWITCH
-   =============================== */
 let mode = "A";
 const modeABtn = document.getElementById("modeA");
 const modeBBtn = document.getElementById("modeB");
@@ -406,6 +440,9 @@ modeABtn.onclick = () => {
   panelB.style.display = "none";
   modeABtn.classList.add("active");
   modeBBtn.classList.remove("active");
+
+  resetStatus();
+  setCalcEnabled(false);
 };
 
 modeBBtn.onclick = () => {
@@ -414,11 +451,12 @@ modeBBtn.onclick = () => {
   panelA.style.display = "none";
   modeBBtn.classList.add("active");
   modeABtn.classList.remove("active");
+
+  resetStatus();
+  setCalcEnabled(false);
+  checkModeBReady();
 };
 
-/* ===============================
-   Drag & Drop Upload (Panel A)
-   =============================== */
 const lastgangInput = document.getElementById("lastgangFile");
 const uploadBoxA = document.getElementById("uploadBoxA");
 
@@ -443,23 +481,17 @@ if (uploadBoxA && lastgangInput){
   });
 }
 
-/* ===============================
-   CALC
-   =============================== */
 document.getElementById("calc").onclick = () => {
-// alte Fehlermarkierungen entfernen
 document.querySelectorAll(".input-error").forEach(el =>
   el.classList.remove("input-error")
 );
 
 let hasError = false;
 
-// Pflichtfelder je Modus prüfen
 requiredFields.forEach(id => {
   const el = document.getElementById(id);
   if (!el) return;
 
-  // Option A → sumMWh & spot ignorieren
   if (mode === "A" && (id === "sumMWh" || id === "spot")) return;
 
   if (!el.value || Number(el.value) <= 0) {
@@ -476,7 +508,6 @@ if (hasError) {
   explanation.style.display = "none";
   explanation.innerHTML = "";
 
-  // Pflichtfelder (A und B gleich)
   const VM = reqNumber(document.getElementById("contract").value);
   const EP_contract = reqNumber(document.getElementById("ep").value);
 
@@ -485,13 +516,13 @@ if (hasError) {
     return;
   }
 
-  let AM = null;   // Jahresverbrauch (MWh)
-  let Spot = null; // Spotpreis (€/MWh)
+  let AM = null; 
+  let Spot = null;
 
   if (mode === "A"){
-    // Nicht raten: wenn nicht sauber erkannt → auf Option B verweisen
     if (!Number.isFinite(window.totalMWh) || !Number.isFinite(window.spotMarketValue)){
       showWarning("Lastgang konnte nicht sicher erkannt/ausgewertet werden. Bitte Option B verwenden und Jahresverbrauch + Spotpreis manuell eintragen.");
+	  setCalcEnabled(false);
       return;
     }
     AM = window.totalMWh;
@@ -506,7 +537,6 @@ if (hasError) {
     }
   }
 
-  // Toleranzband
   const TBU = 0.8 * VM;
   const TBO = 1.2 * VM;
 
@@ -521,7 +551,6 @@ if (hasError) {
     cls = "high";
   }
 
-  // Output
   document.getElementById("rMWh").textContent =
     AM.toLocaleString("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " MWh";
 
@@ -558,74 +587,12 @@ if (hasError) {
       Die Mehrmenge wird mit einem anteiligen Spotmarktpreis bewertet und gemäß Vertrag berücksichtigt.
     `;
   }
-  document.querySelector(".result")
-// 🔽 Eingabedaten für PDF / Prüfbarkeit anzeigen
-document.getElementById("sContract").textContent =
-  VM.toLocaleString("de-DE") + " MWh";
-
-document.getElementById("sEP").textContent =
-  EP_contract.toLocaleString("de-DE") + " €/MWh";
-
-document.getElementById("sAM").textContent =
-  AM.toLocaleString("de-DE") + " MWh";
-
-document.getElementById("sSpot").textContent =
-  Spot.toLocaleString("de-DE") + " €/MWh";
-
-document.getElementById("inputSummary").style.display = "block";
-
-// ✅ danach scrollen (separat!)
 document.querySelector(".result").scrollIntoView({ behavior: "smooth" });
 };
-
-/* ===============================
-   PDF EXPORT
-   =============================== */
 document.getElementById("pdf").onclick = () => {
-  // Deckblatt füllen
-  document.getElementById("pdfCompany").textContent =
-    document.getElementById("company").value || "–";
-
-  document.getElementById("pdfMalo").textContent =
-    document.getElementById("malo").value || "–";
-
-  document.getElementById("pdfMode").textContent =
-    mode === "A" ? "A – Lastgang" : "B – Jahresmenge + Spotpreis";
-
-  document.getElementById("pdfDate").textContent =
-    new Date().toLocaleString("de-DE");
-
-  // Deckblatt anzeigen
- document.getElementById("pdf").onclick = () => {
-  document.getElementById("pdfCompany").textContent =
-    document.getElementById("company").value || "–";
-
-  document.getElementById("pdfMalo").textContent =
-    document.getElementById("malo").value || "–";
-
-  document.getElementById("pdfMode").textContent =
-    mode === "A" ? "A – Lastgang" : "B – Jahresmenge + Spotpreis";
-
-  document.getElementById("pdfDate").textContent =
-    new Date().toLocaleString("de-DE");
-
-  html2pdf()
-    .set({
-      margin: 10,
-      filename: "Toleranzbandrechnung_Strom.pdf",
-      image: { type: "jpeg", quality: 0.98 },
-      html2canvas: { scale: 2 },
-      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
-    })
-    .from(document.querySelector(".container"))
-    .save();
-};
+  window.print();
 };
 
-
-/* ===============================
-   Lastgang-Datei einlesen (Option A)
-   =============================== */
 if (lastgangInput) {
   lastgangInput.addEventListener("change", () => {
     setLoading(true);
@@ -646,7 +613,6 @@ if (lastgangInput) {
         const sheetName = workbook.SheetNames[0];
         const sheet = workbook.Sheets[sheetName];
 
-        // ✅ MaLo automatisch aus D3 ziehen (wenn vorhanden) – NICHT raten
         const maloCell = sheet["D3"] ? sheet["D3"].v : null;
         const extractedMalo = extractMaloFromText(maloCell);
         if (extractedMalo){
@@ -656,7 +622,6 @@ if (lastgangInput) {
           console.log("ℹ️ Keine Marktlokationsnummer in D3 erkannt.");
         }
 
-        // Daten als JSON (robust)
         const rows = XLSX.utils.sheet_to_json(sheet, { defval: null });
 
         console.log("Lastgang geladen ✅");
@@ -664,12 +629,8 @@ if (lastgangInput) {
 
         if (rows.length !== 35040) {
           showWarning("⚠️ Der Lastgang umfasst nicht exakt 35.040 Viertelstundenwerte (Kalenderjahr). Bitte prüfen (Teiljahr / Zeitumstellung / Datenlücken).");
-          // Wir rechnen trotzdem weiter – aber ohne Werte zu erfinden.
         }
 
-        // ===============================
-        // Verbrauchsspalte robust erkennen
-        // ===============================
         let consumptionColumn = null;
         let bestScore = -1;
 
@@ -678,6 +639,7 @@ if (lastgangInput) {
         if (!rows[0] || typeof rows[0] !== "object"){
           setLoading(false);
           showWarning("Lastgang konnte nicht sicher erkannt/ausgewertet werden. Bitte Option B verwenden und Jahresverbrauch + Spotpreis manuell eintragen.");
+		  setCalcEnabled(false);
           return;
         }
 
@@ -703,7 +665,7 @@ if (lastgangInput) {
         if (!consumptionColumn || bestScore < 50) {
           setLoading(false);
           showWarning("Lastgang konnte nicht sicher erkannt/ausgewertet werden. Bitte Option B verwenden und Jahresverbrauch + Spotpreis manuell eintragen.");
-          // keine Werte setzen!
+		  setCalcEnabled(false);
           window.totalMWh = undefined;
           window.spotMarketValue = undefined;
           return;
@@ -713,9 +675,6 @@ if (lastgangInput) {
         window._lastgangRows = rows;
         window._consumptionColumn = consumptionColumn;
 
-        // ===============================
-        // Einheit automatisch erkennen
-        // ===============================
         let unit = "kWh";
 
         for (const r of rows.slice(0, 50)) {
@@ -741,9 +700,6 @@ if (lastgangInput) {
           unitSelectEl.onchange = () => recalcFromUnit();
         }
 
-        // ===============================
-        // Umrechnung kW → kWh (15min)
-        // ===============================
         const selectedUnit = (unitSelectEl && unitSelectEl.value) ? unitSelectEl.value : (window.detectedUnit || "kWh");
         const factor = selectedUnit === "kW" ? 0.25 : 1;
 
@@ -759,12 +715,10 @@ if (lastgangInput) {
           showWarning(`⚠️ Es wurden ${negativeCount} negative Verbrauchswerte gefunden. Bitte Lastgang prüfen. (Für sichere Berechnung ggf. Option B nutzen.)`);
         }
 
-        // ===============================
-        // Spotkosten berechnen – ohne raten
-        // ===============================
         if (!Array.isArray(SPOT_PRICES) || SPOT_PRICES.length === 0) {
           setLoading(false);
           showWarning("Lastgang konnte nicht sicher erkannt/ausgewertet werden. Bitte Option B verwenden und Jahresverbrauch + Spotpreis manuell eintragen.");
+		  setCalcEnabled(false);
           window.totalMWh = undefined;
           window.spotMarketValue = undefined;
           return;
@@ -773,6 +727,7 @@ if (lastgangInput) {
         if (consumptionKWh.length !== SPOT_PRICES.length) {
           setLoading(false);
           showWarning("Lastgang konnte nicht sicher erkannt/ausgewertet werden. Bitte Option B verwenden und Jahresverbrauch + Spotpreis manuell eintragen.");
+		  setCalcEnabled(false);
           window.totalMWh = undefined;
           window.spotMarketValue = undefined;
           return;
@@ -786,6 +741,7 @@ if (lastgangInput) {
         if (!Number.isFinite(totalMWh) || totalMWh <= 0) {
           setLoading(false);
           showWarning("Lastgang konnte nicht sicher erkannt/ausgewertet werden. Bitte Option B verwenden und Jahresverbrauch + Spotpreis manuell eintragen.");
+		  setCalcEnabled(false);
           window.totalMWh = undefined;
           window.spotMarketValue = undefined;
           return;
@@ -797,17 +753,17 @@ if (lastgangInput) {
         if (!Number.isFinite(spotMarketValue)) {
           setLoading(false);
           showWarning("Lastgang konnte nicht sicher erkannt/ausgewertet werden. Bitte Option B verwenden und Jahresverbrauch + Spotpreis manuell eintragen.");
+		  setCalcEnabled(false);
           window.totalMWh = undefined;
           window.spotMarketValue = undefined;
           return;
         }
 
-        // Plausibilitätswarnung (aber keine Werte erfinden)
         if (spotMarketValue < 10 || spotMarketValue > 300) {
           showWarning("⚠️ Der ermittelte Spotmarktwert liegt außerhalb typischer Marktbereiche. Bitte Lastgang/Einheit/Spotpreise prüfen. (Für sichere Eingabe ggf. Option B nutzen.)");
         } else {
-          // Nur wenn alles plausibel ist: Statusinfo (kein Pflicht)
           showOkStatus("Lastgang erfolgreich verarbeitet. Du kannst jetzt berechnen.", "ok");
+		  setCalcEnabled(true);
         }
 
         window.totalMWh = totalMWh;
@@ -818,6 +774,7 @@ if (lastgangInput) {
         console.error(err);
         setLoading(false);
         showWarning("Lastgang konnte nicht sicher erkannt/ausgewertet werden. Bitte Option B verwenden und Jahresverbrauch + Spotpreis manuell eintragen.");
+		setCalcEnabled(false);
         window.totalMWh = undefined;
         window.spotMarketValue = undefined;
       }
@@ -826,6 +783,7 @@ if (lastgangInput) {
     reader.onerror = () => {
       setLoading(false);
       showWarning("Lastgang konnte nicht sicher erkannt/ausgewertet werden. Bitte Option B verwenden und Jahresverbrauch + Spotpreis manuell eintragen.");
+	  setCalcEnabled(false);
       window.totalMWh = undefined;
       window.spotMarketValue = undefined;
     };
@@ -834,9 +792,6 @@ if (lastgangInput) {
   });
 }
 
-/* ===============================
-   Recalc when unit changes
-   =============================== */
 function recalcFromUnit() {
   if (!window._lastgangRows || !window._consumptionColumn) return;
 
@@ -855,6 +810,7 @@ function recalcFromUnit() {
 
     if (consumptionKWh.length !== SPOT_PRICES.length){
       showWarning("Lastgang konnte nicht sicher erkannt/ausgewertet werden. Bitte Option B verwenden und Jahresverbrauch + Spotpreis manuell eintragen.");
+	  setCalcEnabled(false);
       window.totalMWh = undefined;
       window.spotMarketValue = undefined;
       return;
@@ -865,6 +821,7 @@ function recalcFromUnit() {
 
     if (!Number.isFinite(totalMWh) || totalMWh <= 0){
       showWarning("Lastgang konnte nicht sicher erkannt/ausgewertet werden. Bitte Option B verwenden und Jahresverbrauch + Spotpreis manuell eintragen.");
+	  setCalcEnabled(false);
       window.totalMWh = undefined;
       window.spotMarketValue = undefined;
       return;
@@ -876,6 +833,7 @@ function recalcFromUnit() {
 
     if (!Number.isFinite(spotMarketValue)){
       showWarning("Lastgang konnte nicht sicher erkannt/ausgewertet werden. Bitte Option B verwenden und Jahresverbrauch + Spotpreis manuell eintragen.");
+	  setCalcEnabled(false);
       window.totalMWh = undefined;
       window.spotMarketValue = undefined;
       return;
@@ -889,6 +847,7 @@ function recalcFromUnit() {
   } catch (e){
     console.error(e);
     showWarning("Lastgang konnte nicht sicher erkannt/ausgewertet werden. Bitte Option B verwenden und Jahresverbrauch + Spotpreis manuell eintragen.");
+	setCalcEnabled(false);
     window.totalMWh = undefined;
     window.spotMarketValue = undefined;
   }
