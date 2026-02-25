@@ -674,7 +674,7 @@ body{
             <option value="kW">kW (Leistung je 15 Minuten)</option>
           </select>
           <small style="display:block;margin-top:6px;color:#565656">
-            Automatisch erkannt – bitte prüfen.
+            Automatisch erkannt.
           </small>
         </div>
       </div>
@@ -1098,7 +1098,7 @@ if (hasError) {
   const EP_contract = reqNumber(document.getElementById("ep").value);
 
   if (!VM || !EP_contract){
-    showWarning("Bitte Pflichtfelder ausfüllen: Vertragsmenge (MWh) und Arbeitspreis (€/MWh).");
+    showWarning("Bitte alle Pflichtfelder ausfüllen.");
     return;
   }
 
@@ -1107,7 +1107,7 @@ if (hasError) {
 
   if (mode === "A"){
     if (!Number.isFinite(window.totalMWh) || !Number.isFinite(window.spotMarketValue)){
-      showWarning("Lastgang konnte nicht sicher erkannt/ausgewertet werden. Bitte Option B verwenden und Jahresverbrauch + Spotpreis manuell eintragen.");
+      showWarning("Lastgang konnte nicht erkannt/ausgewertet werden.<br>Bitte Option B verwenden und Jahresverbrauch + Spotpreis manuell eintragen.");
 	  setCalcEnabled(false);
       return;
     }
@@ -1118,7 +1118,7 @@ if (hasError) {
     Spot = reqNumber(document.getElementById("spot").value);
 
     if (!AM || !Spot){
-      showWarning("Bitte Pflichtfelder ausfüllen (Option B): Jahresverbrauch (MWh) und Durchschnittlicher Spotpreis (€/MWh).");
+      showWarning("Bitte alle Pflichtfelder ausfüllen.");
       return;
     }
   }
@@ -1389,18 +1389,18 @@ if (lastgangInput) {
         const extractedMalo = extractMaloFromText(maloCell);
         if (extractedMalo){
           document.getElementById("malo").value = extractedMalo;
-          console.log("✅ Marktlokationsnummer erkannt (D3):", extractedMalo);
+          console.log("Marktlokationsnummer erkannt (D3):", extractedMalo);
         } else {
-          console.log("ℹ️ Keine Marktlokationsnummer in D3 erkannt.");
+          console.log("Keine Marktlokationsnummer in D3 erkannt.");
         }
 
         const rows = XLSX.utils.sheet_to_json(sheet, { defval: null });
 
-        console.log("Lastgang geladen ✅");
+        console.log("Lastgang geladen");
         console.log("Anzahl Zeilen:", rows.length);
 
         if (rows.length !== 35040) {
-          showWarning("⚠️ Der Lastgang umfasst nicht exakt 35.040 Viertelstundenwerte (Kalenderjahr). Bitte prüfen (Teiljahr / Zeitumstellung / Datenlücken).");
+          showWarning("Der Lastgang umfasst nicht exakt 35.040 Viertelstundenwerte.<br>Bitte prüfen.");
         }
 
 let consumptionColumn = null;
@@ -1471,7 +1471,7 @@ Object.keys(rows[0]).forEach(col => {
 
 if (!consumptionColumn){
   setLoading(false);
-  showWarning("❌ Keine Verbrauchsspalte erkannt. Bitte Option B verwenden.");
+  showWarning("Keine Verbrauchsspalte erkannt.<br>Bitte Option B verwenden.");
   setCalcEnabled(false);
   window.totalMWh = undefined;
   window.spotMarketValue = undefined;
@@ -1528,12 +1528,12 @@ if (unitBox && unitSelectEl) {
 
         const negativeCount = consumptionKWh.filter(v => v < 0).length;
         if (negativeCount > 0) {
-          showWarning(`⚠️ Es wurden ${negativeCount} negative Verbrauchswerte gefunden. Bitte Lastgang prüfen. (Für sichere Berechnung ggf. Option B nutzen.)`);
+          showWarning(`⚠️ Es wurden ${negativeCount} negative Verbrauchswerte gefunden.<br>Bitte Lastgang prüfen oder Option B nutzen.)`);
         }
 
         if (!Array.isArray(SPOT_PRICES) || SPOT_PRICES.length === 0) {
           setLoading(false);
-          showWarning("Lastgang konnte nicht sicher erkannt/ausgewertet werden. Bitte Option B verwenden und Jahresverbrauch + Spotpreis manuell eintragen.");
+          showWarning("Lastgang konnte nicht erkannt/ausgewertet werden.<br>Bitte Option B verwenden und Jahresverbrauch + Spotpreis manuell eintragen.");
 		  setCalcEnabled(false);
           window.totalMWh = undefined;
           window.spotMarketValue = undefined;
@@ -1542,7 +1542,7 @@ if (unitBox && unitSelectEl) {
 
         if (consumptionKWh.length !== SPOT_PRICES.length) {
           setLoading(false);
-          showWarning("Lastgang konnte nicht sicher erkannt/ausgewertet werden. Bitte Option B verwenden und Jahresverbrauch + Spotpreis manuell eintragen.");
+          showWarning("Lastgang konnte nicht erkannt/ausgewertet werden.<br>Bitte Option B verwenden und Jahresverbrauch + Spotpreis manuell eintragen.");
 		  setCalcEnabled(false);
           window.totalMWh = undefined;
           window.spotMarketValue = undefined;
@@ -1556,7 +1556,7 @@ if (unitBox && unitSelectEl) {
 
         if (!Number.isFinite(totalMWh) || totalMWh <= 0) {
           setLoading(false);
-          showWarning("Lastgang konnte nicht sicher erkannt/ausgewertet werden. Bitte Option B verwenden und Jahresverbrauch + Spotpreis manuell eintragen.");
+          showWarning("Lastgang konnte nicht erkannt/ausgewertet werden.<br>Bitte Option B verwenden und Jahresverbrauch + Spotpreis manuell eintragen.");
 		  setCalcEnabled(false);
           window.totalMWh = undefined;
           window.spotMarketValue = undefined;
@@ -1568,7 +1568,7 @@ if (unitBox && unitSelectEl) {
 
         if (!Number.isFinite(spotMarketValue)) {
           setLoading(false);
-          showWarning("Lastgang konnte nicht sicher erkannt/ausgewertet werden. Bitte Option B verwenden und Jahresverbrauch + Spotpreis manuell eintragen.");
+          showWarning("Lastgang konnte nicht erkannt/ausgewertet werden.<br>Bitte Option B verwenden und Jahresverbrauch + Spotpreis manuell eintragen.");
 		  setCalcEnabled(false);
           window.totalMWh = undefined;
           window.spotMarketValue = undefined;
@@ -1576,7 +1576,7 @@ if (unitBox && unitSelectEl) {
         }
 
         if (spotMarketValue < 10 || spotMarketValue > 300) {
-          showWarning("⚠️ Der ermittelte Spotmarktwert liegt außerhalb typischer Marktbereiche. Bitte Lastgang/Einheit/Spotpreise prüfen. (Für sichere Eingabe ggf. Option B nutzen.)");
+          showWarning("Der ermittelte Spotmarktwert liegt außerhalb typischer Marktbereiche.<br>Bitte Spotpreise prüfen.");
         } else {
           showOkStatus("Lastgang erfolgreich verarbeitet. Du kannst jetzt berechnen.");
 		  checkModeBReady();
@@ -1589,7 +1589,7 @@ if (unitBox && unitSelectEl) {
       } catch (err){
         console.error(err);
         setLoading(false);
-        showWarning("Lastgang konnte nicht sicher erkannt/ausgewertet werden. Bitte Option B verwenden und Jahresverbrauch + Spotpreis manuell eintragen.");
+        showWarning("Lastgang konnte nicht erkannt/ausgewertet werden.<br>Bitte Option B verwenden und Jahresverbrauch + Spotpreis manuell eintragen.");
 		setCalcEnabled(false);
         window.totalMWh = undefined;
         window.spotMarketValue = undefined;
@@ -1598,7 +1598,7 @@ if (unitBox && unitSelectEl) {
 
     reader.onerror = () => {
       setLoading(false);
-      showWarning("Lastgang konnte nicht sicher erkannt/ausgewertet werden. Bitte Option B verwenden und Jahresverbrauch + Spotpreis manuell eintragen.");
+      showWarning("Lastgang konnte nicht erkannt/ausgewertet werden.<br>Bitte Option B verwenden und Jahresverbrauch + Spotpreis manuell eintragen.");
 	  setCalcEnabled(false);
       window.totalMWh = undefined;
       window.spotMarketValue = undefined;
@@ -1654,5 +1654,6 @@ function recalcFromUnit() {
 </script>
 </body>
 </html>
+
 
 
