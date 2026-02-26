@@ -1257,21 +1257,18 @@ if (percentEl){
 explanation.style.display = "block";
 if (cls === "ok") {
   explanation.innerHTML = `
-    <strong>Warum ändert sich mein Arbeitspreis nicht?</strong><br>
-    Ihr tatsächlicher Stromverbrauch liegt innerhalb des vertraglich vereinbarten Toleranzbandes (80 % – 120 % der Vertragsmenge).<br>
-Daher bleibt der vereinbarte Arbeitspreis unverändert.
-  `;
-} else if (cls === "low") {
-  explanation.innerHTML = `
-    <strong>Warum sinkt mein Arbeitspreis?</strong><br>
-    Ihr tatsächlicher Stromverbrauch liegt unterhalb von 80 % der vertraglich vereinbarten Menge.<br>
-    Die Abweichung wird mit dem aktuellen Spotmarktpreis bewertet und gemäß Vertrag verrechnet.
+    <strong>Warum bleibt mein Arbeitspreis gleich?</strong><br>
+    Ihr tatsächlicher Stromverbrauch liegt innerhalb des vertraglich vereinbarten
+    Toleranzbandes (80 %–120 % der Vertragsmenge).<br>
+    Daher erfolgt keine Anpassung des Arbeitspreises.
   `;
 } else {
   explanation.innerHTML = `
-    <strong>Warum steigt mein Arbeitspreis?</strong><br>
-    Ihr tatsächlicher Stromverbrauch überschreitet 120 % der vertraglich vereinbarten Menge.<br>
-    Die Mehrmenge wird mit einem anteiligen Spotmarktpreis bewertet und gemäß Vertrag berücksichtigt.
+    <strong>Warum ändert sich mein Arbeitspreis?</strong><br>
+    Ihr tatsächlicher Stromverbrauch liegt außerhalb des vertraglich vereinbarten
+    Toleranzbandes (unter 80 % oder über 120 % der Vertragsmenge).<br>
+    Die Abweichung wird mit dem Spotmarktpreis bewertet und gemäß Vertrag im
+    Arbeitspreis berücksichtigt.
   `;
 }
 
